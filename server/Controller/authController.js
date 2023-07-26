@@ -1,3 +1,4 @@
+const { getOne } = require("./handleFactory");
 const User = require("../Model/userModel");
 const catchAsyncError = require("../Utils/catchAsyncError");
 const jwt = require("jsonwebtoken");
@@ -67,7 +68,6 @@ exports.protect = catchAsyncError(async (req, res, next) => {
       }
     }
   }
-
   if (!token) {
     return next(
       new AppError("You are not logged in please log in to access ", 401)
@@ -88,11 +88,6 @@ exports.protect = catchAsyncError(async (req, res, next) => {
   req.user = freshUser;
   next();
 });
-
-exports.getMe = (req, res, next) => {
-  req.params.id = req.user.id;
-  next();
-};
 
 exports.restrictTo = (...userRoles) => {
   return (req, res, next) => {
@@ -116,3 +111,8 @@ exports.logout = catchAsyncError(async (req, res, next) => {
     message: "Logout Successfull",
   });
 });
+exports.getMe = (req, res, next) => {
+  req.params.id = req.user.id;
+  next();
+};
+exports.getUser = getOne(User);

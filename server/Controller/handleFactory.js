@@ -1,5 +1,5 @@
 const catchAsyncError = require("../Utils/catchAsyncError");
-const AppError = require("./../Utils/appError");
+const AppError = require("./../utils/appError");
 
 exports.createOne = (Model) =>
   catchAsyncError(async (req, res) => {
