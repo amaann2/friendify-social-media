@@ -36,6 +36,15 @@ const postSchema = mongoose.Schema({
   ],
 });
 
+postSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "user",
+    select: "username avatar ",
+  });
+
+  next();
+});
+
 const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;

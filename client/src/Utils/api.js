@@ -9,3 +9,5 @@ export const signUp = (formInput) =>
 
 export const load = () => axios.get(`/api/v1/users/me`);
 export const logout = () => axios.get(`/api/v1/users/logout`);
+
+export const allPost = () => axios.get("/api/v1/posts");

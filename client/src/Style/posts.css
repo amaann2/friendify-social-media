@@ -1,0 +1,114 @@
+.post {
+    width: 400px;
+    border-radius: 10px;
+    background: #fff;
+    margin: 10rem auto;
+}
+
+.post>* {
+    margin: 20px;
+}
+
+.post img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.post header .image {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    overflow: hidden;
+}
+
+.post header .logo {
+    padding: 2.5px;
+    border-radius: 50%;
+    background: #000;
+    box-shadow: 0 8px 0 0, 0 -8px 0 0;
+    margin-left: auto;
+}
+
+.post .image {
+    height: 350px;
+}
+
+.post .svgs {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.post .svgs svg {
+    stroke: #333;
+    fill: #333;
+    width: 25px;
+    height: 20px;
+    transition: 500ms;
+    cursor: pointer;
+}
+
+.post .svgs svg:first-child {
+    fill: none;
+    transform: scale(1.2);
+}
+
+.post .svgs svg:last-child {
+    margin-left: auto;
+}
+
+.post .svgs svg:hover {
+    fill: red;
+    opacity: 0.7;
+}
+
+.post .content {
+    margin: -5px 20px;
+}
+
+.post .content span {
+    color: blue;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.post .comments {
+    color: #bbb;
+}
+
+.post .comments .add-comment {
+    display: flex;
+    align-items: center;
+    margin: 5px 0 10px;
+}
+
+.post .comments .add-comment img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.post .comments .add-comment input {
+    margin-left: 5px;
+    border: 0;
+    outline: 0;
+    border-radius: 20px;
+    width: 100%;
+    background: #0001;
+    padding: 20px;
+    font-size: 10px;
+    height: 30px;
+}
+
+.post .comments span {
+    color: #888;
+    font-weight: bold;
+}

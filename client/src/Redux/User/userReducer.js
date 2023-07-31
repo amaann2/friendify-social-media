@@ -10,6 +10,12 @@ const INITIAL_STATE = {
 export const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case userActionTypes.LOAD_USER_REQUEST:
+      return {
+        ...state,
+        currentUser: null,
+        isAuthentication: false,
+        error: null,
+      };
     case userActionTypes.SET_USER_REQUEST:
       return {
         ...state,

@@ -17,17 +17,15 @@ function App() {
   const { isAuthentication } = useSelector((state) => state.user);
   return (
     <>
-      {isAuthentication ? <Header /> : <Login />}
+      {!isAuthentication ? "" : <Header />}
+
       <Routes>
         <Route
           exact
           path="/"
           element={isAuthentication ? <Home /> : <Login />}
         />
-        <Route
-          path="/login"
-          element={isAuthentication ? <Home /> : <Login />}
-        />
+        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>
       <ToastContainer />
