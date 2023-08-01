@@ -37,6 +37,12 @@ const userSchema = mongoose.Schema({
   },
   mobile: {
     type: String,
+    validate: {
+      validator: function (value) {
+        return validator.isMobilePhone(value, "any", { strictMode: false });
+      },
+      message: "Please provide a valid mobile number",
+    },
   },
   bio: {
     type: String,
@@ -58,6 +64,12 @@ const userSchema = mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+    },
+  ],
+  posts: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Post",
     },
   ],
   saved: [

@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Home from "./Pages/Home";
+import Profile from "./Pages/Profile";
 import { useSelector } from "react-redux";
 import Header from "./Components/Header";
 function App() {
@@ -24,6 +25,11 @@ function App() {
           exact
           path="/"
           element={isAuthentication ? <Home /> : <Login />}
+        />
+        <Route
+          exact
+          path="/:id"
+          element={isAuthentication ? <Profile /> : <Login />}
         />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />

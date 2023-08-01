@@ -23,6 +23,7 @@ const postSchema = mongoose.Schema({
       ref: "User",
     },
   ],
+  
   hashtags: [
     {
       type: String,

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { allPost } from "../../Utils/api";
+import { allPost, getPost } from "../../Utils/api";
 
 export const getAllData = createAsyncThunk(
   "post",
@@ -12,6 +12,7 @@ export const getAllData = createAsyncThunk(
     }
   }
 );
+
 export const postSlice = createSlice({
   name: "post",
   initialState: {

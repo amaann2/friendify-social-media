@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import { login, logout, signUp, load } from "../../Utils/api";
 import { userActionTypes } from "./userActionType";
+import axios from "axios";
 
 export const loginUser = (formInput, onSuccess) => async (dispatch) => {
   try {
@@ -70,6 +71,25 @@ export const loadUser = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: userActionTypes.LOAD_USER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const getUserProfile = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: userActionTypes.USER_PROFILE_REQUEST,
+    });
+    const res = await axios.get(`/api/v1/users/profile/${id}`);
+
+    dispatch({
+      type: userActionTypes.USER_PROFILE_SUCCESS,
+      payload: res.data.data.user,
+    });
+  } catch (error) {
+    dispatch({
+      type: userActionTypes.USER_PROFILE_FAIL,
       payload: error.response.data.message,
     });
   }

@@ -1,18 +1,24 @@
 import React from "react";
 import "../Style/posts.css";
-// import post from "../assests/post.png";
+import { getTimeDifference } from "../Utils/getTimeDifference";
+import { AiOutlineHeart } from "react-icons/ai";
+import { FaRegComment, FaRegShareSquare } from "react-icons/fa";
+import { BsBookmark } from "react-icons/bs";
+import { Link } from "react-router-dom";
 const Posts = ({ post }) => {
-  const { content, media, user, likes, hastags, comments, createdAt } = post;
-  const { username, avatar } = user;
+  const { content, media, user, likes, hashtags, comments, createdAt } = post;
+  const { username, avatar, _id } = user;
   return (
     <div className="post">
       <header>
         <div className="image">
           <img src={avatar} alt="" />
         </div>
-        <div className="content">
-          <h3>{username}</h3>
-          <p>sohag,egypt</p>
+        <div className="header-content">
+          <h3 className="content-username">
+            <Link to={`/${_id}`}>{username}</Link>{" "}
+            <span>{getTimeDifference(createdAt)}</span>
+          </h3>
         </div>
         <div className="logo" />
       </header>
@@ -20,45 +26,26 @@ const Posts = ({ post }) => {
         <img src={media} alt="" />
       </div>
       <div className="svgs">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="heart"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-          />
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-          <path d="M256 32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26S14.4 480 24 480c61.5 0 110-25.7 139.1-46.3C192 442.8 223.2 448 256 448c141.4 0 256-93.1 256-208S397.4 32 256 32zm0 368c-26.7 0-53.1-4.1-78.4-12.1l-22.7-7.2-19.5 13.8c-14.3 10.1-33.9 21.4-57.5 29 7.3-12.1 14.4-25.7 19.9-40.2l10.6-28.1-20.6-21.8C69.7 314.1 48 282.2 48 240c0-88.2 93.3-160 208-160s208 71.8 208 160-93.3 160-208 160z" />
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-          <path d="M 26.070313 3.996094 C 25.734375 4.011719 25.417969 4.109375 25.136719 4.21875 L 25.132813 4.21875 C 24.847656 4.332031 23.492188 4.902344 21.433594 5.765625 C 19.375 6.632813 16.703125 7.757813 14.050781 8.875 C 8.753906 11.105469 3.546875 13.300781 3.546875 13.300781 L 3.609375 13.277344 C 3.609375 13.277344 3.25 13.394531 2.875 13.652344 C 2.683594 13.777344 2.472656 13.949219 2.289063 14.21875 C 2.105469 14.488281 1.957031 14.902344 2.011719 15.328125 C 2.101563 16.050781 2.570313 16.484375 2.90625 16.722656 C 3.246094 16.964844 3.570313 17.078125 3.570313 17.078125 L 3.578125 17.078125 L 8.460938 18.722656 C 8.679688 19.425781 9.949219 23.597656 10.253906 24.558594 C 10.433594 25.132813 10.609375 25.492188 10.828125 25.765625 C 10.933594 25.90625 11.058594 26.023438 11.207031 26.117188 C 11.265625 26.152344 11.328125 26.179688 11.390625 26.203125 C 11.410156 26.214844 11.429688 26.21875 11.453125 26.222656 L 11.402344 26.210938 C 11.417969 26.214844 11.429688 26.226563 11.441406 26.230469 C 11.480469 26.242188 11.507813 26.246094 11.558594 26.253906 C 12.332031 26.488281 12.953125 26.007813 12.953125 26.007813 L 12.988281 25.980469 L 15.871094 23.355469 L 20.703125 27.0625 L 20.8125 27.109375 C 21.820313 27.550781 22.839844 27.304688 23.378906 26.871094 C 23.921875 26.433594 24.132813 25.875 24.132813 25.875 L 24.167969 25.785156 L 27.902344 6.65625 C 28.007813 6.183594 28.035156 5.742188 27.917969 5.3125 C 27.800781 4.882813 27.5 4.480469 27.136719 4.265625 C 26.769531 4.046875 26.40625 3.980469 26.070313 3.996094 Z M 25.96875 6.046875 C 25.964844 6.109375 25.976563 6.101563 25.949219 6.222656 L 25.949219 6.234375 L 22.25 25.164063 C 22.234375 25.191406 22.207031 25.25 22.132813 25.308594 C 22.054688 25.371094 21.992188 25.410156 21.667969 25.28125 L 15.757813 20.75 L 12.1875 24.003906 L 12.9375 19.214844 C 12.9375 19.214844 22.195313 10.585938 22.59375 10.214844 C 22.992188 9.84375 22.859375 9.765625 22.859375 9.765625 C 22.886719 9.3125 22.257813 9.632813 22.257813 9.632813 L 10.082031 17.175781 L 10.078125 17.15625 L 4.242188 15.191406 L 4.242188 15.1875 C 4.238281 15.1875 4.230469 15.183594 4.226563 15.183594 C 4.230469 15.183594 4.257813 15.171875 4.257813 15.171875 L 4.289063 15.15625 L 4.320313 15.144531 C 4.320313 15.144531 9.53125 12.949219 14.828125 10.71875 C 17.480469 9.601563 20.152344 8.476563 22.207031 7.609375 C 24.261719 6.746094 25.78125 6.113281 25.867188 6.078125 C 25.949219 6.046875 25.910156 6.046875 25.96875 6.046875 Z" />
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-          <path d="M336 0H48C21.49 0 0 21.49 0 48v464l192-112 192 112V48c0-26.51-21.49-48-48-48zm0 428.43l-144-84-144 84V54a6 6 0 0 1 6-6h276c3.314 0 6 2.683 6 5.996V428.43z" />
-        </svg>
+        <AiOutlineHeart />
+        <FaRegComment />
+        <FaRegShareSquare />
+        <BsBookmark />
       </div>
       <div className="content">
-        <p>3423 likes</p>
-        <p>
-          {" "}
-          <b>khaled mosbah</b> {content}
-          <span>#cards</span> <span>#html</span> <span>#css</span>
-        </p>
+        <p className="content-like-count">{likes.length} likes</p>
+
+        <div className="detail">
+          <p>{content}</p>
+        </div>
+        {hashtags &&
+          hashtags.map((hastag) => <span className="hashtags">{hastag}</span>)}
       </div>
       <div className="comments">
-        <h4>view all 300 comments</h4>
+        <h4 className="comment">view all {comments.length} comments</h4>
         <div className="add-comment">
-          <img src="//unsplash.it/100" alt="" />
+          <img src={avatar} alt="" />
           <input type="text" placeholder="add your comment..." />
         </div>
-        <span>10 hours ago</span>
       </div>
     </div>
   );

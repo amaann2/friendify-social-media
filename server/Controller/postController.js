@@ -7,13 +7,16 @@ const {
 } = require("./handleFactory");
 const catchAsyncError = require("../Utils/catchAsyncError");
 const Post = require("../Model/postModel");
+const User = require("../Model/userModel");
 
 exports.createPost = catchAsyncError(async (req, res) => {
   const postData = {
     ...req.body,
     user: req.user.id,
   };
+
   const doc = await Post.create(postData);
+  await User.findByIdAndUpdate(req.user.id, { $push: { posts: doc._id } });
   res.status(200).json({
     status: "success",
     data: doc,

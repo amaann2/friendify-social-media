@@ -62,3 +62,29 @@ export const userReducer = (state = INITIAL_STATE, action) => {
       return state;
   }
 };
+
+export const userProfile = (state = { profile: [] }, action) => {
+  switch (action.type) {
+    case userActionTypes.USER_PROFILE_REQUEST:
+      return {
+        loading: true,
+        error: null,
+        profile: [],
+      };
+    case userActionTypes.USER_PROFILE_SUCCESS:
+      return {
+        loading: false,
+        profile: action.payload,
+        error: null,
+      };
+    case userActionTypes.USER_PROFILE_FAIL:
+      return {
+        loading: false,
+        profile: [],
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};

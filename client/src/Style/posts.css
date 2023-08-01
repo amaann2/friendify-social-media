@@ -1,13 +1,25 @@
 .post {
-    width: 400px;
-    border-radius: 10px;
-    background: #fff;
-    margin: 10rem auto;
+    width: 35%;
+    margin: 4rem auto;
+    border-bottom: 2px solid lightgrey;
 }
 
 .post>* {
-    margin: 20px;
+    margin: 2rem;
 }
+
+.post .header-content {
+    margin: -5px 10px;
+    font-size: 1.8rem;
+}
+
+.post .header-content span {
+    padding: 0 8px;
+    font-size: 1.7rem;
+    color: #737373;
+}
+
+
 
 .post img {
     display: block;
@@ -24,8 +36,8 @@
 
 .post header .image {
     border-radius: 50%;
-    width: 35px;
-    height: 35px;
+    width: 5rem;
+    height: 5rem;
     overflow: hidden;
 }
 
@@ -56,10 +68,6 @@
     cursor: pointer;
 }
 
-.post .svgs svg:first-child {
-    fill: none;
-    transform: scale(1.2);
-}
 
 .post .svgs svg:last-child {
     margin-left: auto;
@@ -74,8 +82,30 @@
     margin: -5px 20px;
 }
 
+.content-like-count {
+    font-size: 1.5rem;
+}
+
+.hashtags {
+    font-size: 1.5rem;
+}
+
+.detail {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 1rem 0;
+    font-size: 1.4rem;
+}
+
+
+
+.comment {
+    font-size: 1.3rem;
+}
+
 .post .content span {
-    color: blue;
+    color: #00376b;
     cursor: pointer;
     margin-left: 5px;
 }
@@ -91,8 +121,8 @@
 }
 
 .post .comments .add-comment img {
-    width: 40px;
-    height: 40px;
+    width: 5rem;
+    height: 4rem;
     border-radius: 50%;
 }
 
@@ -104,11 +134,26 @@
     width: 100%;
     background: #0001;
     padding: 20px;
-    font-size: 10px;
+    font-size: 1rem;
+    text-transform: capitalize;
     height: 30px;
 }
 
-.post .comments span {
-    color: #888;
-    font-weight: bold;
+
+@media only screen and (max-width : 1000px) {
+    .post {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width : 1200px) {
+    .post {
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width : 800px) {
+    .post {
+        width: 100%;
+    }
 }

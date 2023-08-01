@@ -1,4 +1,3 @@
-const { getOne } = require("./handleFactory");
 const User = require("../Model/userModel");
 const catchAsyncError = require("../Utils/catchAsyncError");
 const jwt = require("jsonwebtoken");
@@ -115,4 +114,3 @@ exports.getMe = (req, res, next) => {
   req.params.id = req.user.id;
   next();
 };
-exports.getUser = getOne(User);

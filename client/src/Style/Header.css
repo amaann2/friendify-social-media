@@ -1,7 +1,7 @@
 .navigation {
     background-color: #ffffff;
     height: 60px;
-    position: fixed;
+    position: sticky;
     width: 100%;
     top: 0;
     left: 0;
@@ -18,7 +18,7 @@
 
 .navigation .logo img {
     height: 43px;
-    width: 95px;
+    width: 160px;
 }
 
 .navigation-search-container {
@@ -36,6 +36,11 @@
     font-size: 14px;
 }
 
+
+.navigation-icons {
+    font-size: 2.5rem;
+    cursor: pointer;
+}
 
 @media only screen and (min-width: 320px) and (max-width: 650px) {
 
