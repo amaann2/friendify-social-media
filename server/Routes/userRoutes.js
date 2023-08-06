@@ -10,6 +10,8 @@ const {
   getUser,
   getUserProfile,
   getAllUser,
+  followUser,
+  unfollowUser,
 } = require("../Controller/userController");
 const router = express.Router();
 
@@ -22,5 +24,7 @@ router.get("/me", protect, getMe, getUser);
 router.route("/:id").get(getUser);
 router.get("/profile/:id", getUserProfile);
 
+router.post("/:id/follow", protect, followUser);
+router.post("/:id/unfollow", protect, unfollowUser);
 router.route("/").get(getAllUser);
 module.exports = router;

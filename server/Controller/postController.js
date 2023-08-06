@@ -53,6 +53,7 @@ exports.likeUnlikePost = catchAsyncError(async (req, res, next) => {
     message: message,
   });
 });
+
 exports.getPost = getOne(Post);
 exports.getAllPost = getAll(Post);
 exports.updatePost = updateOne(Post);
