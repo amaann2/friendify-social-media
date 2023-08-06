@@ -9,7 +9,7 @@ const Posts = ({ post }) => {
   const { content, media, user, likes, hashtags, comments, createdAt } = post;
   const { username, avatar, _id } = user;
   return (
-    <div className="post">
+    <>
       <header>
         <div className="image">
           <img src={avatar} alt="" />
@@ -47,7 +47,7 @@ const Posts = ({ post }) => {
           <input type="text" placeholder="add your comment..." />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

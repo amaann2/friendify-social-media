@@ -72,8 +72,8 @@ const Profile = () => {
       <main>
         <div className="container">
           <div className="gallery">
-            {profile?.posts?.map((post, i) => (
-              <div className="gallery-item" tabIndex={i}>
+            {profile?.posts?.map((post) => (
+              <div className="gallery-item">
                 <img src={post?.media} className="gallery-image" alt="" />
                 <div className="gallery-item-info">
                   <ul>

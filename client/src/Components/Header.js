@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../Style/Header.css";
 import logo from "../assests/logo.png";
 import { AiOutlinePlusSquare } from "react-icons/ai";
+import { Link } from "react-router-dom";
 const Header = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
@@ -9,7 +10,9 @@ const Header = () => {
     <>
       <div className="navigation">
         <div className="logo">
-          <img src={logo} alt="" />
+          <Link to="/">
+            <img src={logo} alt="" />
+          </Link>
         </div>
         <div className="navigation-search-container">
           <input

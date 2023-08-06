@@ -1,7 +1,7 @@
 const User = require("../Model/userModel");
 const catchAsyncError = require("../Utils/catchAsyncError");
 const AppError = require("../utils/appError");
-const { getOne } = require("./handleFactory");
+const { getOne, getAll } = require("./handleFactory");
 
 exports.getUser = getOne(User);
 
@@ -16,3 +16,5 @@ exports.getUserProfile = catchAsyncError(async (req, res, next) => {
     data: { user },
   });
 });
+
+exports.getAllUser = getAll(User);
