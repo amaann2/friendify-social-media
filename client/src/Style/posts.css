@@ -66,8 +66,12 @@
     height: 20px;
     transition: 500ms;
     cursor: pointer;
+
 }
 
+.post .svgs svg:first-child {
+    fill: red;
+}
 
 .post .svgs svg:last-child {
     margin-left: auto;
@@ -102,8 +106,11 @@
 
 .comment {
     font-size: 1.3rem;
+    cursor: pointer;
 }
-
+.comment:hover{
+    text-decoration: underline;
+}
 .post .content span {
     color: #00376b;
     cursor: pointer;

@@ -6,12 +6,26 @@ import { getUserProfile } from "../Redux/User/userAction";
 const Profile = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { profile,  } = useSelector((state) => state.profile);
+  const { profile } = useSelector((state) => state.profile);
+
+  // useEffect(() => {
+  //   if (profile && profile.followers) {
+  //     setIsFollowing(profile.followers.includes(currentUser._id));
+  //   }
+  // }, [currentUser, setIsFollowing, profile]);
 
   useEffect(() => {
     dispatch(getUserProfile(id));
   }, [dispatch, id]);
-  // console.log(Profile.usernme);
+
+  // const handleFollow = () => {
+  //   dispatch(followUser(id));
+  //   // setIsFollowing(true);
+  // };
+  // const handleUnfollow = () => {
+  //   dispatch(unfollowUser(id));
+  //   // setIsFollowing(false);
+  // };
   return (
     <>
       <header>
@@ -26,7 +40,9 @@ const Profile = () => {
             </div>
             <div className="profile-user-settings">
               <h1 className="profile-user-name">{profile?.username}</h1>
+
               <button className="btn profile-edit-btn">follow</button>
+
               <button
                 className="btn profile-settings-btn"
                 aria-label="profile settings"

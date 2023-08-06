@@ -1,0 +1,57 @@
+.modal-container {
+    position: fixed;
+    z-index: 5000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal {
+    border-radius: 10px;
+    padding: 2rem;
+    width: 60em;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.modal .comment-section .img {
+    width: 10%;
+}
+
+.modal .comment-section .img img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.modal .comment-section {
+    padding: 1%;
+    display: flex;
+    margin-bottom: 3rem;
+}
+
+.comment-body {
+    padding-left: 4%;
+    font-size: 1.5em;
+    font-weight: lighter;
+}
+
+.comment-name {
+    font-weight: bold;
+    font-size: 2.3rem;
+}
+
+.comment-heart {
+    width: 20%;
+    padding-top: 3%;
+    text-align: center;
+}
+
+.muted {
+    padding-top: 3%;
+    font-size: 0.8em;
+    color: grey;
+}

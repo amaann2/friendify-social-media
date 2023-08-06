@@ -19,8 +19,10 @@ exports.getUserProfile = catchAsyncError(async (req, res, next) => {
 
 exports.getAllUser = getAll(User);
 
+//* ---------------- follow user------------------------------
+
 exports.followUser = catchAsyncError(async (req, res, next) => {
-  //Todo : get id of both user
+  //todo : get id of both user
   const userToFollowId = req.params.id;
   const currentUserId = req.user.id;
 
@@ -52,8 +54,9 @@ exports.followUser = catchAsyncError(async (req, res, next) => {
   });
 });
 
-exports.unfollowUser = catchAsyncError(async (req, res, next) => {
+//* ---------------- Unfollow user------------------------------
 
+exports.unfollowUser = catchAsyncError(async (req, res, next) => {
   //Todo : get the id of user to unfollow and current user id from the request
   const userToUnfollowId = req.params.id;
   const currentUserId = req.user.id;
