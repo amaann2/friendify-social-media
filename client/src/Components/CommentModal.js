@@ -26,7 +26,7 @@ const CommentModal = ({ closeModal, id }) => {
                     <div className="comment-section">
 
                         <div className="img">
-                            <img src={c?.user?.avatar} alt="" />
+                            <img src={c?.user?.avatar?.url} alt="" />
                         </div>
                         <div className="comment-body">
                             <span className="comment-name">{c?.user?.username}</span> <br />

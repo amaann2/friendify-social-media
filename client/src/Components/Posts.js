@@ -39,7 +39,7 @@ const Posts = ({ post }) => {
       )}
       <header>
         <div className="image">
-          <img src={avatar} alt="" />
+          <img src={avatar.url} alt="" />
         </div>
         <div className="header-content">
           <h3 className="content-username">
@@ -80,7 +80,7 @@ const Posts = ({ post }) => {
           view all {comments.length} comments
         </h4>
         <div className="add-comment">
-          <img src={avatar} alt="" />
+          <img src={avatar.url} alt="" />
           <input type="text" placeholder="add your comment..." />
         </div>
       </div>

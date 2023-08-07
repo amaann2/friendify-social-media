@@ -13,16 +13,12 @@ const {
   followUser,
   unfollowUser,
 } = require("../Controller/userController");
-const multer = require("multer");
-
-const upload = multer({
-  dest: "public/img/users",
-});
+const upload = require("../Utils/multer");
 
 const router = express.Router();
 
 // authentication
-router.post("/signup", signUp);
+router.post("/signup", upload.single("avatar"), signUp);
 router.post("/login", login);
 router.get("/logout", logout);
 

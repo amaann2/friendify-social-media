@@ -19,8 +19,6 @@
     color: #737373;
 }
 
-
-
 .post img {
     display: block;
     width: 100%;
@@ -50,7 +48,7 @@
 }
 
 .post .media {
-    min-height: 400px;
+    min-height: 300px;
 }
 
 

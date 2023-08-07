@@ -3,6 +3,7 @@ const catchAsyncError = require("../Utils/catchAsyncError");
 const jwt = require("jsonwebtoken");
 const AppError = require("./../utils/appError");
 const { promisify } = require("util");
+const cloudinary = require("../Utils/cloudinary");
 const signInToken = (id) => {
   return jwt.sign({ id: id }, process.env.JWT_SECRET_KEY, {
     expiresIn: process.env.JWT_EXPIRES_IN,
@@ -30,11 +31,23 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 exports.signUp = catchAsyncError(async (req, res) => {
+  let avatarData = {};
+  if (req.file) {
+    const myCloud = await cloudinary.uploader.upload(req.file.path, {
+      folder: "avatars",
+    });
+    avatarData = {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    };
+  }
+
   const user = await User.create({
     name: req.body.name,
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,
+    avatar: avatarData,
   });
   createSendToken(user, 200, res);
 });

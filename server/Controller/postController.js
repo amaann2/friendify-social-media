@@ -29,7 +29,6 @@ exports.resizePostImages = catchAsyncError(async (req, res, next) => {
 
   req.body.media = `user-${req.user.id}-${Date.now()}-post.jpeg`;
   await sharp(req.files.media[0].buffer)
-    // .resize(2000, 1333)
     .toFormat("jpeg")
     .jpeg({ quality: 90 })
     .toFile(`public/img/users/${req.body.media}`);
