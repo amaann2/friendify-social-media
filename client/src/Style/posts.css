@@ -49,9 +49,10 @@
     margin-left: auto;
 }
 
-.post .image {
-    height: 350px;
+.post .media {
+    min-height: 400px;
 }
+
 
 .post .svgs {
     display: flex;
@@ -108,9 +109,11 @@
     font-size: 1.3rem;
     cursor: pointer;
 }
-.comment:hover{
+
+.comment:hover {
     text-decoration: underline;
 }
+
 .post .content span {
     color: #00376b;
     cursor: pointer;

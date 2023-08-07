@@ -13,18 +13,30 @@ const {
   followUser,
   unfollowUser,
 } = require("../Controller/userController");
+const multer = require("multer");
+
+const upload = multer({
+  dest: "public/img/users",
+});
+
 const router = express.Router();
 
+// authentication
 router.post("/signup", signUp);
 router.post("/login", login);
 router.get("/logout", logout);
 
 router.get("/me", protect, getMe, getUser);
 
+// user crud operation
+router.route("/").get(getAllUser);
 router.route("/:id").get(getUser);
 router.get("/profile/:id", getUserProfile);
 
+// follow | Unfollow  a user
 router.post("/:id/follow", protect, followUser);
 router.post("/:id/unfollow", protect, unfollowUser);
-router.route("/").get(getAllUser);
+
+//upload a user photo
+
 module.exports = router;

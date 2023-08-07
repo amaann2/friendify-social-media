@@ -90,7 +90,11 @@ const Profile = () => {
           <div className="gallery">
             {profile?.posts?.map((post) => (
               <div className="gallery-item">
-                <img src={post?.media} className="gallery-image" alt="" />
+                <img
+                  src={`/img/users/${post?.media}`}
+                  className="gallery-image"
+                  alt=""
+                />
                 <div className="gallery-item-info">
                   <ul>
                     <li className="gallery-item-likes">

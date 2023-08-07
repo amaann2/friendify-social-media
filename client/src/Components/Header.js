@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "../Style/Header.css";
 import logo from "../assests/logo.png";
-import { AiOutlinePlusSquare } from "react-icons/ai";
+import { AiOutlinePlusSquare, AiOutlineHeart } from "react-icons/ai";
+import { GoHome } from "react-icons/go";
+import { RxAvatar } from "react-icons/rx";
+import { BsChatDots } from "react-icons/bs";
 import { Link } from "react-router-dom";
 const Header = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
@@ -33,7 +36,13 @@ const Header = () => {
           )}
         </div>
         <div className="navigation-icons">
+          <Link to="/">
+            <GoHome />
+          </Link>
+          <BsChatDots />
           <AiOutlinePlusSquare />
+          <AiOutlineHeart />
+          <RxAvatar />
         </div>
       </div>
     </>

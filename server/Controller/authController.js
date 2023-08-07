@@ -117,6 +117,4 @@ exports.getMe = (req, res, next) => {
 
 exports.forgotPassword = catchAsyncError(async (req, res, next) => {
   const email = req.params.email;
-
-  
 });

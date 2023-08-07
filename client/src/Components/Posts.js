@@ -15,6 +15,7 @@ const Posts = ({ post }) => {
   const [liked, setLiked] = useState(likes.includes(currentUser._id));
   const [likeCount, setLikeCount] = useState(likes.length);
   const [commentModalOpen, setCommentModalOpen] = useState(false);
+  console.log(media);
   const handleLikeUnlike = async () => {
     try {
       setLiked(!liked);
@@ -48,8 +49,12 @@ const Posts = ({ post }) => {
         </div>
         <div className="logo" />
       </header>
-      <div className="image">
-        <img src={media} alt="" onDoubleClick={handleLikeUnlike} />
+      <div className="media">
+        <img
+          src={`/img/users/${media}`}
+          alt=""
+          onDoubleClick={handleLikeUnlike}
+        />
       </div>
       <div className="svgs">
         {liked ? (
@@ -57,7 +62,7 @@ const Posts = ({ post }) => {
         ) : (
           <AiOutlineHeart onClick={handleLikeUnlike} />
         )}
-        <FaRegComment onClick={()=>setCommentModalOpen(true)}/>
+        <FaRegComment onClick={() => setCommentModalOpen(true)} />
         <FaRegShareSquare />
         <BsBookmark />
       </div>
