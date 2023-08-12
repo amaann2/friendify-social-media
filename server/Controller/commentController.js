@@ -38,3 +38,43 @@ exports.getCommentOnPost = catchAsyncError(async (req, res, next) => {
     data: doc,
   });
 });
+
+exports.updateComment = catchAsyncError(async (req, res, next) => {
+  const commentId = req.params.commentId;
+  const comment = await Comment.findById(commentId);
+  if (!comment) {
+    return next(new AppError("no comment found ", 404));
+  }
+
+  if (comment.user.toString() !== req.user.id) {
+    return next(
+      new AppError("You are not authorized to update this comment", 403)
+    );
+  }
+  comment.content = req.body.content;
+  await comment.save();
+
+  res.status(200).json({
+    status: "Success",
+    data: comment,
+  });
+});
+exports.deleteComment = catchAsyncError(async (req, res, next) => {
+  const commentId = req.params.commentId;
+  const comment = await Comment.findById(commentId);
+  if (!comment) {
+    return next(new AppError("no comment found ", 404));
+  }
+
+  if (comment.user.toString() !== req.user.id) {
+    return next(
+      new AppError("You are not authorized to update this comment", 403)
+    );
+  }
+  await comment.deleteOne();
+
+  res.status(204).json({
+    status: "Success",
+    data: null,
+  });
+});

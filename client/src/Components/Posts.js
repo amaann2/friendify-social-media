@@ -50,11 +50,7 @@ const Posts = ({ post }) => {
         <div className="logo" />
       </header>
       <div className="media">
-        <img
-          src={`/img/users/${media}`}
-          alt=""
-          onDoubleClick={handleLikeUnlike}
-        />
+        <img src={`${media?.url}`} alt="" onDoubleClick={handleLikeUnlike} />
       </div>
       <div className="svgs">
         {liked ? (

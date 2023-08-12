@@ -33,8 +33,8 @@ const Profile = () => {
           <div className="profile">
             <div className="profile-image">
               <img
-                // src={profile?.avatar}
-                src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces"
+                src={profile?.avatar?.url}
+                // src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces"
                 alt=""
               />
             </div>

@@ -6,11 +6,14 @@ import { GoHome } from "react-icons/go";
 import { RxAvatar } from "react-icons/rx";
 import { BsChatDots } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import AddPostModal from "./AddPostModal";
 const Header = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
+      {isModalOpen && <AddPostModal closeModal={() => setIsModalOpen(false)} />}
       <div className="navigation">
         <div className="logo">
           <Link to="/">
@@ -40,7 +43,7 @@ const Header = () => {
             <GoHome />
           </Link>
           <BsChatDots />
-          <AiOutlinePlusSquare />
+          <AiOutlinePlusSquare onClick={() => setIsModalOpen(true)} />
           <AiOutlineHeart />
           <RxAvatar />
         </div>

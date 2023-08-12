@@ -1,0 +1,10 @@
+.partition {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.left{
+    padding-right: 3rem;
+}

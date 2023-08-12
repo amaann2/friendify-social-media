@@ -13,7 +13,7 @@
 .modal {
     border-radius: 10px;
     padding: 2rem;
-    width: 60em;
+    min-width: 60rem;
     background-color: white;
     border: 1px solid black;
 }

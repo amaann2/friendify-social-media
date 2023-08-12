@@ -49,7 +49,7 @@ img {
 
 .profile-image {
     float: left;
-    width: calc(33.333% - 1rem);
+    /* width: calc(33.333% - 1rem); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,6 +58,7 @@ img {
 
 .profile-image img {
     border-radius: 50%;
+    width: 20rem;
 }
 
 .profile-user-settings,
@@ -285,13 +286,6 @@ main {
     }
 }
 
-/* Spinner Animation */
-
-@keyframes loader {
-    to {
-        transform: rotate(360deg);
-    }
-}
 
 
 
@@ -320,7 +314,7 @@ main {
     .profile-bio,
     .gallery-item,
     .gallery {
-        /* width: auto; */
+        width: auto;
         margin: 0;
     }
 

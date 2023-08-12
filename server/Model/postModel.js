@@ -11,7 +11,12 @@ const postSchema = mongoose.Schema({
     required: true,
   },
   media: {
-    type: String,
+    public_id: {
+      type: String,
+    },
+    url: {
+      type: String,
+    },
   },
   createdAt: {
     type: Date,
@@ -23,7 +28,7 @@ const postSchema = mongoose.Schema({
       ref: "User",
     },
   ],
-  
+
   hashtags: [
     {
       type: String,

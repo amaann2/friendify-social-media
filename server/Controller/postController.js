@@ -1,54 +1,120 @@
-const { getAll, deleteOne, updateOne, getOne } = require("./handleFactory");
 const catchAsyncError = require("../Utils/catchAsyncError");
 const Post = require("../Model/postModel");
 const User = require("../Model/userModel");
 const AppError = require("../utils/appError");
-const multer = require("multer");
-const sharp = require("sharp");
-const multerStorage = multer.memoryStorage();
-const multerFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith("image")) {
-    cb(null, true);
-  } else {
-    cb(new AppError("Not an image ! please upload a image", 400), false);
-  }
-};
-const upload = multer({
-  storage: multerStorage,
-  fileFilter: multerFilter,
-});
+const cloudinary = require("../Utils/cloudinary");
 
-exports.uploadPostImage = upload.fields([
-  {
-    name: "media",
-    maxCount: 1,
-  },
-]);
-exports.resizePostImages = catchAsyncError(async (req, res, next) => {
-  if (!req.files.media) return next();
-
-  req.body.media = `user-${req.user.id}-${Date.now()}-post.jpeg`;
-  await sharp(req.files.media[0].buffer)
-    .toFormat("jpeg")
-    .jpeg({ quality: 90 })
-    .toFile(`public/img/users/${req.body.media}`);
-
-  next();
-});
+// create post
 exports.createPost = catchAsyncError(async (req, res) => {
+  const myCloud = await cloudinary.uploader.upload(req.file.path, {
+    folder: "posts",
+  });
+  const avatarData = {
+    public_id: myCloud.public_id,
+    url: myCloud.secure_url,
+  };
   const postData = {
     ...req.body,
     user: req.user.id,
+    media: avatarData,
   };
 
   const doc = await Post.create(postData);
+
   await User.findByIdAndUpdate(req.user.id, { $push: { posts: doc._id } });
+
   res.status(200).json({
     status: "success",
     data: doc,
   });
 });
 
+// get all post
+exports.getAllPost = catchAsyncError(async (req, res) => {
+  let query = Post.find();
+
+  query = query.sort("-createdAt");
+  const documents = await query;
+
+  res.status(200).json({
+    status: "success",
+    results: documents.length,
+    data: documents,
+  });
+});
+
+// get single post
+exports.getPost = catchAsyncError(async (req, res, next) => {
+  const postId = req.params.id;
+
+  const post = await Post.findById(postId);
+
+  if (!post) {
+    return next(new AppError("No Post found with that id", 404));
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: post,
+  });
+});
+
+// update post
+exports.updatePost = catchAsyncError(async (req, res, next) => {
+  const postId = req.params.id;
+  const userId = req.user.id;
+
+  const post = await Post.findById(postId);
+  if (!post) {
+    return next(new AppError("Post not found", 404));
+  }
+
+  if (post.user.id.toString() !== userId) {
+    return next(
+      new AppError("You are not authorized to update this post", 403)
+    );
+  }
+
+  post.content = req.body.content;
+
+  await post.save();
+
+  res.status(200).json({
+    status: "Success",
+    data: post,
+  });
+});
+
+// delete post
+exports.deletePost = catchAsyncError(async (req, res, next) => {
+  const postId = req.params.id;
+
+  const post = await Post.findById(postId);
+
+  if (!post) {
+    return next(new AppError("No Post found with that id", 404));
+  }
+
+  if (post.user.id.toString() !== req.user.id) {
+    return next(
+      new AppError("You are not authorized to delete this post", 403)
+    );
+  }
+
+  await post.deleteOne();
+
+  const user = await User.findById(req.user.id);
+  user.posts.pull(postId);
+  await user.save();
+
+  res.status(204).json({
+    status: true,
+    data: null,
+  });
+});
+
+
+// like | unlike post
 exports.likeUnlikePost = catchAsyncError(async (req, res, next) => {
   const postId = req.params.id;
   const userId = req.user.id;
@@ -71,15 +137,9 @@ exports.likeUnlikePost = catchAsyncError(async (req, res, next) => {
   //TODO: Save the updated post in the database
   await post.save();
 
-  // TODO: send response
   const message = isLiked ? "Post Unliked " : "Post Liked";
   res.status(200).json({
     status: "Success",
     message: message,
   });
 });
-
-exports.getPost = getOne(Post);
-exports.getAllPost = getAll(Post);
-exports.updatePost = updateOne(Post);
-exports.deletePost = deleteOne(Post);
