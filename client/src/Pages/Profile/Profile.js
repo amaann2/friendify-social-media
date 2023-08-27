@@ -1,42 +1,24 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import "../Style/profile.css";
+import "./profile.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserProfile } from "../Redux/User/userAction";
+import { getUserProfile } from "../../Redux/User/userAction";
 const Profile = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.profile);
 
-  // useEffect(() => {
-  //   if (profile && profile.followers) {
-  //     setIsFollowing(profile.followers.includes(currentUser._id));
-  //   }
-  // }, [currentUser, setIsFollowing, profile]);
-
   useEffect(() => {
     dispatch(getUserProfile(id));
   }, [dispatch, id]);
 
-  // const handleFollow = () => {
-  //   dispatch(followUser(id));
-  //   // setIsFollowing(true);
-  // };
-  // const handleUnfollow = () => {
-  //   dispatch(unfollowUser(id));
-  //   // setIsFollowing(false);
-  // };
   return (
     <>
       <header>
         <div className="container">
           <div className="profile">
             <div className="profile-image">
-              <img
-                src={profile?.avatar?.url}
-                // src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces"
-                alt=""
-              />
+              <img src={profile?.avatar?.url} alt="" />
             </div>
             <div className="profile-user-settings">
               <h1 className="profile-user-name">{profile?.username}</h1>
@@ -91,7 +73,7 @@ const Profile = () => {
             {profile?.posts?.map((post) => (
               <div className="gallery-item">
                 <img
-                  src={`/img/users/${post?.media}`}
+                  src={`${post?.media?.url}`}
                   className="gallery-image"
                   alt=""
                 />

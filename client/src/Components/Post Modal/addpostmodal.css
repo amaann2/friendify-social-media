@@ -1,0 +1,39 @@
+.add-post {
+    display: flex;
+    min-height: 450px;
+    flex-wrap: wrap;
+}
+
+.left {
+    min-width: 350px;
+    max-width: 350px;
+
+
+
+}
+
+.left img {
+    width: 100%;
+}
+
+.right {
+    min-width: 350px;
+    max-width: 350px;
+    padding-left: 2rem;
+}
+
+.right-profile {
+    display: flex;
+    /* justify-content: space-around; */
+}
+
+
+.right-avatar img {
+    /* display: block;
+    
+    border-radius: 50%; */
+    /* object-fit: cover; */
+    width: 20%;
+}
+
+@media only screen and (max-width:800px) {}

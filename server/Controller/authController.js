@@ -144,7 +144,7 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
   const resetToken = user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false });
 
-  const resetUrl = `http://localhost:5000/${resetToken}`;
+  const resetUrl = `http://localhost:3000/${user._id}/${resetToken}`;
   const message = `Forgot your Password? Submit a patch request with your new password and confirm password to : ${resetUrl}. \n If you didn't forget your password, please ignore this email!`;
   try {
     await sendEmail({
@@ -154,7 +154,7 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
     });
     res.status(200).json({
       status: "success",
-      message: "Token send to email",
+      message: "Reset Password link send to email",
     });
   } catch (error) {
     user.passwordResetToken = undefined;
@@ -189,5 +189,8 @@ exports.resetPassword = catchAsyncError(async (req, res, next) => {
   user.passwordResetExpires = undefined;
   await user.save();
 
-  createSendToken(user, 200, res);
+  res.status(200).json({
+    status: "success",
+    message: "Password Reset Successfully",
+  });
 });

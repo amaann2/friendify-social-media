@@ -1,19 +1,27 @@
 import React, { useState } from "react";
-import "../Style/Header.css";
-import logo from "../assests/logo.png";
+import "./Header.css";
+import logo from "../../assests/logo.png";
 import { AiOutlinePlusSquare, AiOutlineHeart } from "react-icons/ai";
 import { GoHome } from "react-icons/go";
 import { RxAvatar } from "react-icons/rx";
 import { BsChatDots } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import AddPostModal from "./AddPostModal";
+import AddPostModal from "../Post Modal/AddPostModal";
+import { useSelector } from "react-redux";
+
 const Header = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { currentUser } = useSelector((state) => state.user);
 
   return (
     <>
-      {isModalOpen && <AddPostModal closeModal={() => setIsModalOpen(false)} />}
+      {isModalOpen && (
+        <AddPostModal
+          closeModal={() => setIsModalOpen(false)}
+          currentUser={currentUser}
+        />
+      )}
       <div className="navigation">
         <div className="logo">
           <Link to="/">

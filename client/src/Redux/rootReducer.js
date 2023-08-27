@@ -1,4 +1,5 @@
 import {
+  forgotUserPassword,
   userProfile,
   userReducer,
 } from "./User/userReducer";
@@ -8,4 +9,5 @@ export const rootReducer = combineReducers({
   user: userReducer,
   post: postSlice,
   profile: userProfile,
+  forgotPassword: forgotUserPassword,
 });

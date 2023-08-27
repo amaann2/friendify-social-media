@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "../Style/modal.css";
+import "./modal.css";
 import axios from "axios";
-import { getTimeDifference } from "../Utils/getTimeDifference";
+import { getTimeDifference } from "../../Utils/getTimeDifference";
 const CommentModal = ({ closeModal, id }) => {
   const [comment, setComment] = useState(null);
 

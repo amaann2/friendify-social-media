@@ -89,4 +89,36 @@ export const userProfile = (state = { profile: [] }, action) => {
   }
 };
 
+export const forgotUserPassword = (state = {}, action) => {
+  switch (action.type) {
+    case userActionTypes.FORGOT_PASSWORD_REQUEST:
+    case userActionTypes.RESET_PASSWORD_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case userActionTypes.FORGOT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: action.payload,
+      };
+    case userActionTypes.RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: action.payload,
+      };
 
+    case userActionTypes.FORGOT_PASSWORD_FAIL:
+    case userActionTypes.RESET_PASSWORD_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};

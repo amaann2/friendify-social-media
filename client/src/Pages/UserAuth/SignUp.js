@@ -1,21 +1,24 @@
 import React from "react";
-import { useState } from "react";
-import "../Style/form.css";
+import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import logo from "../assests/logo.png";
-import { Link } from "react-router-dom";
+import logo from "../../assests/logo.png";
+import { Link, useNavigate } from "react-router-dom";
 import { TailSpin } from "react-loader-spinner";
-import { signUpUser } from "../Redux/User/userAction";
+import { signUpUser } from "../../Redux/User/userAction";
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.user);
+  const inputRef = useRef(null)
+  const navigate = useNavigate();
+
   const [formInput, setFormInput] = useState({
     name: "",
     email: "",
     username: "",
     password: "",
   });
+  const [avatar, setAvatar] = useState('')
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormInput({
@@ -23,23 +26,50 @@ const SignUp = () => {
       [name]: value,
     });
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(signUpUser(formInput));
+  const handleClick = () => {
+    inputRef.current.click()
+  }
+  const handleImageChange = (event) => {
+    setAvatar(event.target.files[0])
+  }
+  const onSuccess = () => {
+    navigate("/");
     setFormInput({
       name: "",
       email: "",
       username: "",
       password: "",
     });
+    setAvatar('')
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let formData = new FormData()
+
+    const { name, email, username, password } = formInput;
+
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("username", username);
+    formData.append("password", password);
+    formData.append("avatar", avatar);
+
+    dispatch(signUpUser(formData, onSuccess));
+
+
+  };
+
   return (
     <div className="form">
       <form onSubmit={handleSubmit}>
         <ul>
+
           <li>
             <img src={logo} alt="" className="form-logo" />
           </li>
+
+
           <li>
             <label htmlFor="username">
               <span className="label">
@@ -100,8 +130,26 @@ const SignUp = () => {
               required
             />
           </li>
+          <li >
+
+            {
+              avatar ?
+                <img onClick={handleClick} src={URL.createObjectURL(avatar)} className="form-avatar" alt="" />
+                :
+                <img onClick={handleClick} src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" className="form-avatar" alt="" />
+            }
+          </li>
           <li>
-            <button className="btn">
+            {/* <label htmlFor="avatar">
+              <span className="label">
+                Profile image
+              </span>
+            </label> */}
+            <input type="file" name="avatar" id="avatar" ref={inputRef} style={{ display: 'none' }} onChange={handleImageChange} />
+          </li>
+
+          <li>
+            <button className="form-btn">
               {loading ? (
                 <TailSpin
                   height="30"

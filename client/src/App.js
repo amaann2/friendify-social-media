@@ -1,16 +1,18 @@
 import "./App.css";
 import { useEffect } from "react";
 import { loadUser } from "./Redux/User/userAction";
-import Login from "./Pages/Login";
+import Login from "./Pages/UserAuth/Login";
 import store from "./Redux/store";
-import SignUp from "./Pages/SignUp";
+import SignUp from "./Pages/UserAuth/SignUp";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Home from "./Pages/Home";
-import Profile from "./Pages/Profile";
+import Home from "./Pages/Home/Home";
+import Profile from "./Pages/Profile/Profile";
 import { useSelector } from "react-redux";
-import Header from "./Components/Header";
+import Header from "./Components/Header/Header";
+import ForgotPassword from "./Pages/UserAuth/ForgotPassword";
+import ResetPassword from "./Pages/UserAuth/ResetPassword";
 function App() {
   useEffect(() => {
     store.dispatch(loadUser());
@@ -33,6 +35,8 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/:id/:token" element={<ResetPassword />} />
       </Routes>
       <ToastContainer />
     </>

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../Redux/User/userAction";
-import Posts from "../Components/Posts";
-import { getAllData } from "../Redux/Post/postSlice";
-import InstagramPostLoader from "../Utils/InstagramPostLoader";
+import { logoutUser } from "../../Redux/User/userAction";
+import Posts from "../../Components/Post/Posts";
+import { getAllData } from "../../Redux/Post/postSlice";
+import InstagramPostLoader from "../../Utils/InstagramPostLoader";
 const Home = () => {
   const dispatch = useDispatch();
   const { post, loading } = useSelector((state) => state.post);
